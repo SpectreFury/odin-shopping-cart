@@ -38,3 +38,8 @@
 .image:hover {
   opacity: 0.7;
 }
+
+.default {
+  text-decoration: none;
+  color: inherit;
+}
