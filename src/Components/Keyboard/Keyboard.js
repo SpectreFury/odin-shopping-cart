@@ -14,6 +14,7 @@ const Keyboard = (props) => {
             image={keyboard.img}
             name={keyboard.name}
             price={keyboard.price}
+            key={keyboard.id}
           />
         ))}
       </main>

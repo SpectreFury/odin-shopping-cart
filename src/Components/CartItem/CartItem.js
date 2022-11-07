@@ -6,7 +6,6 @@ import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {
   const { name, img, price } = props.item;
-  const { cartList, handleCartItems } = props;
   const [cartQuantity, setCartQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
 
@@ -33,7 +32,6 @@ const CartItem = (props) => {
           value={cartQuantity}
           onChange={(e) => {
             setCartQuantity(e.target.value);
-            handleCartItems(e.target.value);
           }}
         />
       </td>

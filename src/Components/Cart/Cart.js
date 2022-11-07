@@ -26,6 +26,7 @@ const Cart = (props) => {
                 cartList={props.cartList}
                 quantity={props.quantity}
                 handleCartItems={props.handleCartItems}
+                key={item.id}
               />
             ))}
           </tbody>

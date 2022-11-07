@@ -68,7 +68,6 @@ function App() {
               cartItems={cartItems}
               cartList={cartList}
               handleCartList={setCartList}
-              handleCartItems={setCartItems}
             />
           }
         />
