@@ -7,7 +7,7 @@ import styles from "./Keyboard.module.css";
 const Keyboard = (props) => {
   return (
     <React.Fragment>
-      <NavBar darkMode={true} />
+      <NavBar darkMode={true} cartItems={props.cartItems} />
       <main className={styles.flex}>
         {props.keyboards.map((keyboard) => (
           <Card

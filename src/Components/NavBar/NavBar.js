@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -32,7 +32,7 @@ const NavBar = (props) => {
           </Link>
           <Link to="/cart" className={styles.relative}>
             <FontAwesomeIcon icon={faCartShopping} className={styles.cart} />
-            <span className={styles.item}>0</span>
+            <span className={styles.item}>{props.cartItems}</span>
           </Link>
         </ul>
       </div>

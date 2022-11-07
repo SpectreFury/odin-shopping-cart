@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Homepage from "./Components/Homepage/Homepage";
 import Keyboard from "./Components/Keyboard/Keyboard";
 import Details from "./Components/Details/Details";
+import Cart from "./Components/Cart/Cart";
 
 import HelloGanss from "./assets/keyboards/helloganss.jpg";
 import HelloGanssAlt from "./assets/keyboards/helloganss-alt.jpg";
@@ -38,17 +39,38 @@ const KEYBOARD_LIST = [
 ];
 
 function App() {
+  const [cartItems, setCartItems] = useState(0);
+  const [cartList, setCartList] = useState([]);
+
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Homepage cartItems={cartItems} />} />
         <Route
           path="keyboard"
-          element={<Keyboard keyboards={KEYBOARD_LIST} />}
+          element={<Keyboard keyboards={KEYBOARD_LIST} cartItems={cartItems} />}
         />
         <Route
           path="keyboard/:id"
-          element={<Details keyboards={KEYBOARD_LIST} />}
+          element={
+            <Details
+              keyboards={KEYBOARD_LIST}
+              cartItems={cartItems}
+              handleCartItems={setCartItems}
+              handleCartList={setCartList}
+            />
+          }
+        />
+        <Route
+          path="cart"
+          element={
+            <Cart
+              cartItems={cartItems}
+              cartList={cartList}
+              handleCartList={setCartList}
+              handleCartItems={setCartItems}
+            />
+          }
         />
       </Routes>
     </React.Fragment>
