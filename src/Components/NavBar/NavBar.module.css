@@ -1,0 +1,58 @@
+.navdark {
+  width: 100%;
+  background-color: rgba(10, 10, 10, 0.9);
+}
+
+.navbar {
+  max-width: 1120px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 2;
+}
+
+.logo {
+  width: 100px;
+}
+
+.cart {
+  position: relative;
+  width: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cart:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.relative {
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  bottom: 0;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 2px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.navlink {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin: 0 1.6rem;
+}
+
+.navlink:hover {
+  color: rgba(255, 255, 255, 1);
+}
