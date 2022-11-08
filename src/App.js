@@ -5,6 +5,7 @@ import Homepage from "./Components/Homepage/Homepage";
 import Keyboard from "./Components/Keyboard/Keyboard";
 import Details from "./Components/Details/Details";
 import Cart from "./Components/Cart/Cart";
+import Error from "./Components/Error/Error";
 
 import HelloGanss from "./assets/keyboards/helloganss.jpg";
 import HelloGanssAlt from "./assets/keyboards/helloganss-alt.jpg";
@@ -43,26 +44,26 @@ const KEYBOARD_LIST = [
 ];
 
 function App() {
-  const [cartItems, setCartItems] = useState(0);
   const [cartList, setCartList] = useState([]);
-  const [total, setTotal] = useState(0);
+
+  const [itemCount, setItemCount] = useState([]);
 
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Homepage cartItems={cartItems} />} />
+        <Route path="/" element={<Homepage itemCount={itemCount} />} />
         <Route
           path="keyboard"
-          element={<Keyboard keyboards={KEYBOARD_LIST} cartItems={cartItems} />}
+          element={<Keyboard keyboards={KEYBOARD_LIST} itemCount={itemCount} />}
         />
         <Route
           path="keyboard/:id"
           element={
             <Details
               keyboards={KEYBOARD_LIST}
-              cartItems={cartItems}
-              handleCartItems={setCartItems}
               handleCartList={setCartList}
+              itemCount={itemCount}
+              handleItemCount={setItemCount}
             />
           }
         />
@@ -70,13 +71,14 @@ function App() {
           path="cart"
           element={
             <Cart
-              cartItems={cartItems}
               cartList={cartList}
               handleCartList={setCartList}
-              handleTotal={setTotal}
+              itemCount={itemCount}
+              handleItemCount={setItemCount}
             />
           }
         />
+        <Route path="*" element={<Error itemCount={itemCount} />} />
       </Routes>
     </React.Fragment>
   );

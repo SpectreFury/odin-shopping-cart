@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,19 @@ import Logo from "../../assets/white.svg";
 import styles from "./NavBar.module.css";
 
 const NavBar = (props) => {
+  const { itemCount } = props;
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let itemTotal = 0;
+
+    itemCount.map((item) => {
+      itemTotal = itemTotal + item.count;
+    });
+
+    setTotal(itemTotal);
+  }, [itemCount]);
+
   return (
     <nav className={props.darkMode ? styles.navdark : ""}>
       <div className={styles.navbar}>
@@ -32,7 +45,7 @@ const NavBar = (props) => {
           </Link>
           <Link to="/cart" className={styles.relative}>
             <FontAwesomeIcon icon={faCartShopping} className={styles.cart} />
-            <span className={styles.item}>{props.cartItems}</span>
+            <span className={styles.item}>{total}</span>
           </Link>
         </ul>
       </div>

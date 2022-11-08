@@ -5,13 +5,20 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {
-  const { name, img, price, quantity } = props.item;
-  const [cartQuantity, setCartQuantity] = useState(quantity);
+  const { name, img, price, id } = props.item;
+  const [cartQuantity, setCartQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
     setSubtotal(+price.replace(",", "") * cartQuantity);
   }, [cartQuantity]);
+
+  useEffect(() => {
+    const currentCount = props.itemCount.find((item) => item.id === id);
+    if (currentCount) {
+      setCartQuantity(currentCount.count);
+    }
+  }, [props.itemCount]);
 
   return (
     <tr>
@@ -23,6 +30,11 @@ const CartItem = (props) => {
             const filteredList = props.cartList.filter(
               (item) => item.name !== name
             );
+
+            props.handleItemCount((prevItem) => {
+              const filterItem = prevItem.filter((item) => item.id !== id);
+              return [...filterItem];
+            });
 
             props.handleCartList([...filteredList]);
           }}
@@ -42,6 +54,10 @@ const CartItem = (props) => {
           value={cartQuantity}
           onChange={(e) => {
             setCartQuantity(+e.target.value);
+            props.handleItemCount((prevItem) => {
+              const filterList = prevItem.filter((item) => item.id !== id);
+              return [...filterList, { id: id, count: +e.target.value }];
+            });
           }}
         />
       </td>

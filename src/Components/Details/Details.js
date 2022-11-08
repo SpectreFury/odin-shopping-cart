@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import NavBar from "../NavBar/NavBar";
@@ -11,9 +11,23 @@ const Details = (props) => {
 
   const keyboard = keyboards.filter((keyboard) => keyboard.id === id)[0];
 
+  useEffect(() => {
+    const currentCount = props.itemCount.find(
+      (item) => item.id === keyboard.id
+    );
+
+    if (currentCount) {
+      setQuantity(currentCount.count);
+    }
+  }, [props.itemCount]);
+
   return (
     <React.Fragment>
-      <NavBar darkMode={true} cartItems={props.cartItems} />
+      <NavBar
+        darkMode={true}
+        cartItems={props.cartItems}
+        itemCount={props.itemCount}
+      />
       <section className={styles.flex}>
         <img src={keyboard.img} className={styles.image} />
         <h1 className={styles.title}>{keyboard.name}</h1>
@@ -30,7 +44,6 @@ const Details = (props) => {
           <button
             className={styles.button}
             onClick={() => {
-              props.handleCartItems((prevItem) => prevItem + quantity);
               props.handleCartList((prevList) => {
                 const filteredList = prevList.filter(
                   (item) => item.name !== keyboard.name
@@ -38,6 +51,15 @@ const Details = (props) => {
                 keyboard.quantity = quantity;
 
                 return [...filteredList, keyboard];
+              });
+              props.handleItemCount((prevItem) => {
+                if (!prevItem) return [{ id: keyboard.id, count: quantity }];
+
+                const filterList = prevItem.filter(
+                  (item) => item.id !== keyboard.id
+                );
+
+                return [...filterList, { id: keyboard.id, count: quantity }];
               });
             }}
           >
