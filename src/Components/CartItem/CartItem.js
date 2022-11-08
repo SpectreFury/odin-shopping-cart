@@ -5,18 +5,28 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CartItem.module.css";
 
 const CartItem = (props) => {
-  const { name, img, price } = props.item;
-  const [cartQuantity, setCartQuantity] = useState(1);
+  const { name, img, price, quantity } = props.item;
+  const [cartQuantity, setCartQuantity] = useState(quantity);
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
     setSubtotal(+price.replace(",", "") * cartQuantity);
-  });
+  }, [cartQuantity]);
 
   return (
     <tr>
       <td className={styles.td}>
-        <FontAwesomeIcon icon={faXmark} className={styles.icon} />
+        <FontAwesomeIcon
+          icon={faXmark}
+          className={styles.icon}
+          onClick={() => {
+            const filteredList = props.cartList.filter(
+              (item) => item.name !== name
+            );
+
+            props.handleCartList([...filteredList]);
+          }}
+        />
       </td>
       <td className={styles.td}>
         <img src={img} className={styles.image} />
@@ -31,7 +41,7 @@ const CartItem = (props) => {
           className={styles.input}
           value={cartQuantity}
           onChange={(e) => {
-            setCartQuantity(e.target.value);
+            setCartQuantity(+e.target.value);
           }}
         />
       </td>

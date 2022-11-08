@@ -17,30 +17,35 @@ const KEYBOARD_LIST = [
     name: "Hello Ganss GS 87C-HT",
     img: HelloGanss,
     price: "9,999.00",
+    quantity: 1,
   },
   {
     id: "hello-ganss-alt-83g",
     name: "Hello Ganss ALT 83G",
     img: HelloGanssAlt,
     price: "7,199.00",
+    quantity: 1,
   },
   {
     id: "ducky-one",
     name: "Ducky One",
     img: DuckyOne,
     price: "12,499.00",
+    quantity: 1,
   },
   {
     id: "royal-kludge-rk61",
     name: "Royal Kludge RK61",
     img: RoyalKludge,
     price: "4,499.00",
+    quantity: 1,
   },
 ];
 
 function App() {
   const [cartItems, setCartItems] = useState(0);
   const [cartList, setCartList] = useState([]);
+  const [total, setTotal] = useState(0);
 
   return (
     <React.Fragment>
@@ -68,6 +73,7 @@ function App() {
               cartItems={cartItems}
               cartList={cartList}
               handleCartList={setCartList}
+              handleTotal={setTotal}
             />
           }
         />

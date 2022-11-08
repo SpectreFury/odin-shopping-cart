@@ -32,11 +32,10 @@ const Details = (props) => {
             onClick={() => {
               props.handleCartItems((prevItem) => prevItem + quantity);
               props.handleCartList((prevList) => {
-                if (!prevList) return [...prevList, keyboard];
-
                 const filteredList = prevList.filter(
                   (item) => item.name !== keyboard.name
                 );
+                keyboard.quantity = quantity;
 
                 return [...filteredList, keyboard];
               });

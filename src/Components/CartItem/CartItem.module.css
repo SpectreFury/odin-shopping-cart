@@ -11,6 +11,10 @@
   padding: 12px;
 }
 
+.icon:hover {
+  color: #f96262;
+}
+
 .name {
   color: rgba(0, 0, 0, 1);
   font-size: 14px;

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import CartItem from "../CartItem/CartItem";
 
 import styles from "./Cart.module.css";
 
 const Cart = (props) => {
+  useEffect(() => {
+    let total = 0;
+
+    props.cartList.map((item) => {
+      total = total + item.quantity;
+    });
+
+    props.handleTotal(total);
+  });
+
   return (
     <React.Fragment>
       <NavBar darkMode={true} cartItems={props.cartItems} />
@@ -26,6 +36,7 @@ const Cart = (props) => {
                 cartList={props.cartList}
                 quantity={props.quantity}
                 handleCartItems={props.handleCartItems}
+                handleCartList={props.handleCartList}
                 key={item.id}
               />
             ))}
